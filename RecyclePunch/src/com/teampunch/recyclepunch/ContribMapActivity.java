@@ -44,7 +44,7 @@ public class ContribMapActivity extends FragmentActivity implements ConnectionCa
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_find_map);
+		setContentView(R.layout.activity_contrib_map);
 		resolving = (savedInstanceState == null)? false: 
 			savedInstanceState.getBoolean(RESOLUTION_SAVE_STATE, false);
         apiClient = new GoogleApiClient.Builder(this)
@@ -67,12 +67,7 @@ public class ContribMapActivity extends FragmentActivity implements ConnectionCa
 			gm.addMarker(marmopt);
 		}
 	}
-	
-	public void viewallClicked(View view) {
-		Intent intent = new Intent(this, MapDetailActivity.class);
-    	startActivity(intent);
-	}
-	
+		
 	@Override
 	protected void onStop(){
 		apiClient.disconnect();
@@ -82,7 +77,7 @@ public class ContribMapActivity extends FragmentActivity implements ConnectionCa
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.find_map, menu);
+		getMenuInflater().inflate(R.menu.contrib_map, menu);
 		return true;
 	}
 
