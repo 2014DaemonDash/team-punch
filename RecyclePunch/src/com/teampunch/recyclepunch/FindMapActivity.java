@@ -22,7 +22,10 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.teampunch.recyclepunch.Database.DatabaseLocation;
 
 public class FindMapActivity extends FragmentActivity implements ConnectionCallbacks, OnConnectionFailedListener {
 
@@ -57,6 +60,12 @@ public class FindMapActivity extends FragmentActivity implements ConnectionCallb
 		apiClient.connect();
 		
 		database = Database.loadDataFromStorage(this);
+		for (DatabaseLocation dl : database.getLocations()){
+			MarkerOptions marmopt = new MarkerOptions()
+					.position(dl.toCoord())
+					.icon(BitmapDescriptorFactory.defaultMarker((dl.getType() == 0)? 0.0f: 0.5f));
+			gm.addMarker(marmopt);
+		}
 	}
 	
 	public void viewallClicked(View view) {

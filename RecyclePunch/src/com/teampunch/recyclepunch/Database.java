@@ -20,13 +20,15 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class Database
 {	
-	private ArrayList<Location> locations;
+	private ArrayList<DatabaseLocation> locations;
 	
 	public Database()
 	{
-		locations = new ArrayList<Location>();
+		locations = new ArrayList<DatabaseLocation>();
 	}
 	
 	public static Database loadDataFromStorage(Context context)
@@ -92,7 +94,7 @@ public class Database
 			int numBins = Integer.parseInt(brd.readLine());
 			for (int i=0; i<numBins; i++)
 			{
-				Location loc = new Location();
+				DatabaseLocation loc = new DatabaseLocation();
 				loc.loadData(brd);
 				locations.add(loc);
 			}
@@ -103,7 +105,7 @@ public class Database
 		}
 		
 		Log.i("Database", "done");
-		for (Location loc : locations)
+		for (DatabaseLocation loc : locations)
 		{
 			Log.i("Database", loc.x + ", " + loc.y + ", " + loc.type);
 		}
@@ -116,12 +118,12 @@ public class Database
 		int numBins = dis.readInt();
 		for (int i=0; i<numBins; i++)
 		{
-			Location loc = new Location();
+			DatabaseLocation loc = new DatabaseLocation();
 			loc.loadData(dis);
 			locations.add(loc);
 		}
 		
-		for (Location loc : locations)
+		for (DatabaseLocation loc : locations)
 		{
 			Log.i("Database", loc.x + ", " + loc.y + ", " + loc.type);
 		}
@@ -132,7 +134,7 @@ public class Database
 		DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(os));
 		
 		dos.writeInt(locations.size());
-		for (Location loc : locations)
+		for (DatabaseLocation loc : locations)
 		{
 			loc.saveData(dos);
 		}
@@ -140,10 +142,14 @@ public class Database
 		dos.close();
 	}
 	
-	public class Location
+	public ArrayList<DatabaseLocation> getLocations(){
+		return locations;
+	}
+	
+	public class DatabaseLocation
 	{
-		public double x, y; //longitude, latitude, in degrees
-		public byte type;
+		private double x, y; //longitude, latitude, in degrees
+		private byte type;
 		
 		public void loadData(BufferedReader brd) throws IOException, NumberFormatException
 		{
@@ -165,5 +171,16 @@ public class Database
 			dos.writeDouble(y);
 			dos.writeByte(type);
 		}
+		
+		public LatLng toCoord(){
+			return new LatLng(x, y);
+		}
+		
+		public double getX(){ return x; }
+		public double getY(){ return y; }
+		public byte getType(){ return type; }
+		public void setX(double x){ this.x = x; }
+		public void setY(double y){ this.y = y; }
+		public void setType(byte type){ this.type = type; }
 	}
 }
