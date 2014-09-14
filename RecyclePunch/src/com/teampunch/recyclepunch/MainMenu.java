@@ -25,6 +25,23 @@ public class MainMenu extends Activity {
     	startActivity(intent);
     }
     
+    public void learnClicked(View view)
+    {
+    	Intent intent = new Intent(this, LearnSlidesActivity.class);
+    	startActivity(intent);
+    }
+    
+    public void contribClicked(View view)
+    {
+    	Intent intent = new Intent(this, ContribMapActivity.class);
+    	startActivity(intent);
+    }
+    
+    public void extraClicked(View view)
+    {
+    	Intent intent = new Intent(this, ExtraMenuActivity.class);
+    	startActivity(intent);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

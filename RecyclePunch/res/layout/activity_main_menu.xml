@@ -39,7 +39,8 @@
         android:layout_marginTop="18dp"
         android:adjustViewBounds="true"
         android:scaleType="fitEnd"
-        android:src="@drawable/main_button02" />
+        android:src="@drawable/main_button02"
+        android:onClick="learnClicked" />
 
     <ImageButton
         android:id="@+id/imageButton3"
@@ -50,7 +51,8 @@
         android:layout_marginTop="18dp"
         android:adjustViewBounds="true"
         android:scaleType="fitEnd"
-        android:src="@drawable/main_button03" />
+        android:src="@drawable/main_button03" 
+        android:onClick="contribClicked" />
 
 
     <ImageButton
@@ -63,6 +65,7 @@
         android:layout_marginTop="18dp"
         android:adjustViewBounds="true"
         android:scaleType="fitEnd"
-        android:src="@drawable/main_button04" />
+        android:src="@drawable/main_button04" 
+        android:onClick="extraClicked" />
 
 </RelativeLayout>
