@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -85,11 +86,15 @@ public class FindMapActivity extends FragmentActivity implements ConnectionCallb
 	
 	public void recyclingToggleClicked(View view){
 		drawRecycling = !drawRecycling;
+		ImageButton tmp = (ImageButton)findViewById(R.id.imageButton2);
+		tmp.setImageResource(drawRecycling? R.drawable.recycle_toggle : R.drawable.off_recycle_toggle);
 		repaintMarkers();
 	}
 	
 	public void refillToggleClicked(View view){
 		drawRefill = !drawRefill;
+		ImageButton tmp = (ImageButton)findViewById(R.id.imageButton3);
+		tmp.setImageResource(drawRefill? R.drawable.refill_toggle : R.drawable.off_refill_toggle);
 		repaintMarkers();
 	}
 	
