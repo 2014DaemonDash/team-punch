@@ -24,7 +24,8 @@
             android:layout_alignParentLeft="true"
             android:adjustViewBounds="true"
             android:scaleType="fitEnd"
-            android:src="@drawable/recycle_toggle" />
+            android:src="@drawable/recycle_toggle"
+            android:onClick="recyclingToggleClicked" />
         
         <ImageButton
             android:id="@+id/imageButton3"
@@ -34,7 +35,8 @@
             android:layout_alignParentRight="true"
             android:adjustViewBounds="true"
             android:scaleType="fitEnd"
-            android:src="@drawable/refill_toggle" />
+            android:src="@drawable/refill_toggle"
+            android:onClick="refillToggleClicked" />
 	</LinearLayout>
         <fragment
             android:id="@+id/map"
