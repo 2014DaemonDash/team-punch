@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.teampunch.recyclepunch.Database.DatabaseLocation;
 
 public class MapDetailActivity extends Activity {
 	
-	private Database database;
+	private int sortedUpTo;
 	private boolean type;
+	private double userLat, userLong;
 	private ArrayList<DatabaseLocation> recycleList, refillList;
 
 	@Override
@@ -21,9 +23,13 @@ public class MapDetailActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		overridePendingTransition(R.anim.push_in_left, R.anim.fade_out);
 		setContentView(R.layout.activity_map_detail);
-		byte initState = getIntent().getByteExtra("com.teampunch.recyclepunch.InitCategory", (byte)0);
+		Intent i = getIntent();
+		byte initState = i.getByteExtra("com.teampunch.recyclepunch.InitCategory", (byte)0);
+		double[] coords = i.getDoubleArrayExtra("com.teampunch.recyclepunch.UserCoord");
 		type = initState != 1;
-		database = Database.loadDataFromStorage(this);
+		userLat = coords[0];
+		userLong = coords[1];
+		initLists();
 	}
 
 	@Override
@@ -49,7 +55,24 @@ public class MapDetailActivity extends Activity {
 	
 	private void initLists(){
 		int n = 5;
-}
+		sortedUpTo = 0;
+		recycleList = new ArrayList<DatabaseLocation>();
+		refillList = new ArrayList<DatabaseLocation>();
+		for (DatabaseLocation dl : Database.loadDataFromStorage(this).getLocations()){
+			
+		}
+		
+	}
+	
+	private double distToUser(LatLng coords){
+		double dlon, dlat, a, c, d;
+		dlon = coords.longitude - userLong;
+		dlat = coords.latitude - userLat;
+		a = Math.pow((Math.sin(dlat/2)), 2) + Math.cos(userLat) * Math.cos(coords.latitude) * Math.pow(Math.sin(dlon/2),2);
+		c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+		d = 6373000 * c;
+		return d;
+	}
 
 	public void finish(){
 		super.finish();

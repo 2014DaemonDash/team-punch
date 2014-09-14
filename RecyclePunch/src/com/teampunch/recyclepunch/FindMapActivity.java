@@ -96,7 +96,8 @@ public class FindMapActivity extends FragmentActivity implements ConnectionCallb
 	public void viewallClicked(View view) {
 		Intent intent = new Intent(this, MapDetailActivity.class);
 		intent.putExtra("com.teampunch.recyclepunch.InitCategory", (byte)(2*(drawRecycling?1:0) + (drawRefill?1:0)));
-    	startActivity(intent);
+    	intent.putExtra("com.teampunch.recyclepunch.UserCoord", new double[]{userLat, userLong});
+		startActivity(intent);
 	}
 	
 	private void initMarkers(){
@@ -163,7 +164,8 @@ public class FindMapActivity extends FragmentActivity implements ConnectionCallb
 	public void onConnected(Bundle hint) {
 		Location loc = LocationServices.FusedLocationApi.getLastLocation(apiClient);
 		if (loc != null){
-			gm.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(loc.getLatitude(), loc.getLongitude()), FOCUSED_ZOOM_LEVEL));
+			userLat = loc.getLatitude(); userLong = loc.getLongitude();
+			gm.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(userLat, userLong), FOCUSED_ZOOM_LEVEL));
 		}
 	}
 
