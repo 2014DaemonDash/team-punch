@@ -24,8 +24,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.teampunch.recyclepunch.Database.DatabaseLocation;
 
 public class ContribMapActivity extends FragmentActivity implements ConnectionCallbacks, OnConnectionFailedListener {
 
@@ -40,6 +40,7 @@ public class ContribMapActivity extends FragmentActivity implements ConnectionCa
 	private boolean resolving;
 	
 	private Database database;
+	private Marker m;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +62,6 @@ public class ContribMapActivity extends FragmentActivity implements ConnectionCa
 		apiClient.connect();
 		
 		database = Database.loadDataFromStorage(this);
-		for (DatabaseLocation dl : database.getLocations()){
-			MarkerOptions marmopt = new MarkerOptions()
-					.position(dl.toCoord())
-					.icon(BitmapDescriptorFactory.defaultMarker((dl.getType() == 0)? 0.0f: 0.5f));
-			gm.addMarker(marmopt);
-		}
 	}
 	
 	public void contribClicked(View view) {
@@ -122,7 +117,9 @@ public class ContribMapActivity extends FragmentActivity implements ConnectionCa
 	public void onConnected(Bundle hint) {
 		Location loc = LocationServices.FusedLocationApi.getLastLocation(apiClient);
 		if (loc != null){
-			gm.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(loc.getLatitude(), loc.getLongitude()), FOCUSED_ZOOM_LEVEL));
+			LatLng ll = new LatLng(loc.getLatitude(), loc.getLongitude());
+			gm.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, FOCUSED_ZOOM_LEVEL));
+			m = gm.addMarker(new MarkerOptions().position(ll).draggable(true).icon(BitmapDescriptorFactory.defaultMarker(120.0f)));
 		}
 	}
 
