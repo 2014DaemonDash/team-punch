@@ -35,7 +35,7 @@ public class FindMapActivity extends FragmentActivity implements ConnectionCallb
 	private GoogleMap gm;
 	private boolean resolving;
 	
-	private Database database
+	private Database database;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
