@@ -18,7 +18,6 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -103,12 +102,6 @@ public class Database
 		{
 			
 		}
-		
-		Log.i("Database", "done");
-		for (DatabaseLocation loc : locations)
-		{
-			Log.i("Database", loc.x + ", " + loc.y + ", " + loc.type);
-		}
 	}
 	
 	public void loadData(InputStream is) throws IOException
@@ -121,11 +114,6 @@ public class Database
 			DatabaseLocation loc = new DatabaseLocation();
 			loc.loadData(dis);
 			locations.add(loc);
-		}
-		
-		for (DatabaseLocation loc : locations)
-		{
-			Log.i("Database", loc.x + ", " + loc.y + ", " + loc.type);
 		}
 	}
 	
