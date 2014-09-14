@@ -29,7 +29,7 @@ public class FindMapActivity extends FragmentActivity implements ConnectionCallb
     private static final String ERROR_TAG = "shitsurei, kamimashita";
     private static final String RESOLUTION_SAVE_STATE = "the flub lives on";
     private static final int INIT_ZOOM_LEVEL = 14;
-    private static final int FOCUSED_ZOOM_LEVEL = 17;
+    private static final int FOCUSED_ZOOM_LEVEL = 19;
 	
 	private GoogleApiClient apiClient;
 	private GoogleMap gm;
@@ -74,6 +74,8 @@ public class FindMapActivity extends FragmentActivity implements ConnectionCallb
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
+			Intent intent = new Intent(this, OptionMenuActivity.class);
+        	startActivity(intent);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
