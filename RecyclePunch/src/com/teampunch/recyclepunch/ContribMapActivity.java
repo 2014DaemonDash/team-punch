@@ -67,7 +67,12 @@ public class ContribMapActivity extends FragmentActivity implements ConnectionCa
 			gm.addMarker(marmopt);
 		}
 	}
-		
+	
+	public void contribClicked(View view) {
+		ContributionDialogFragment cdf = new ContributionDialogFragment();
+		cdf.show(getFragmentManager(), "button");
+	}
+	
 	@Override
 	protected void onStop(){
 		apiClient.disconnect();
