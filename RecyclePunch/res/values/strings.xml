@@ -9,5 +9,8 @@
     <string name="title_activity_learn_slides">LearnSlidesActivity</string>
     <string name="title_activity_contrib_map">ContribMapActivity</string>
     <string name="title_activity_extra_menu">ExtraMenuActivity</string>
+    <string name="title_activity_achievements">AchievementsActivity</string>
+    <string name="title_activity_option_menu">OptionMenuActivity</string>
+    <string name="title_activity_credit_menu">CreditMenuActivity</string>
 
 </resources>

@@ -1,42 +1,22 @@
 package com.teampunch.recyclepunch;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-public class ExtraMenuActivity extends Activity {
+public class OptionMenuActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_extra_menu);
+		setContentView(R.layout.activity_option_menu);
 	}
 
-	public void achievementClicked(View view)
-    {
-    	Intent intent = new Intent(this, AchievementsActivity.class);
-    	startActivity(intent);
-    }
-    
-    public void optionClicked(View view)
-    {
-    	Intent intent = new Intent(this, OptionMenuActivity.class);
-    	startActivity(intent);
-    }
-    
-    public void creditClicked(View view)
-    {
-    	Intent intent = new Intent(this, CreditMenuActivity.class);
-    	startActivity(intent);
-    }
-    
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.extra_menu, menu);
+		getMenuInflater().inflate(R.menu.option_menu, menu);
 		return true;
 	}
 
