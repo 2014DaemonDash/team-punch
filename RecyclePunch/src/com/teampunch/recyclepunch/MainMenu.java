@@ -2,9 +2,11 @@ package com.teampunch.recyclepunch;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class MainMenu extends Activity {
@@ -17,7 +19,12 @@ public class MainMenu extends Activity {
         actionBar.hide();
     }
 
-
+    public void findClicked(View view)
+    {
+    	Intent intent = new Intent(this, FindMapActivity.class);
+    	startActivity(intent);
+    }
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
