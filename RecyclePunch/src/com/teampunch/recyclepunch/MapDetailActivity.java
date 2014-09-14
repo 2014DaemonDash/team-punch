@@ -42,7 +42,7 @@ public class MapDetailActivity extends Activity {
 		Intent i = getIntent();
 		byte initState = i.getByteExtra("com.teampunch.recyclepunch.InitCategory", (byte)0);
 		double[] coords = i.getDoubleArrayExtra("com.teampunch.recyclepunch.UserCoord");
-		type = initState != 1;
+		type = initState == 1;
 		userLat = coords[0];
 		userLong = coords[1];
 		initLists();
@@ -73,7 +73,6 @@ public class MapDetailActivity extends Activity {
 	
 	private void initLists()
 	{
-		int n = 5;
 		sortedUpTo = 0;
 		recycleList = new ArrayList<DatabaseLocation>();
 		refillList = new ArrayList<DatabaseLocation>();
@@ -82,6 +81,12 @@ public class MapDetailActivity extends Activity {
 		Collections.sort(db.getLocations(), new DatabaseLocationComparator());
 		
 		adapter = new DetailAdapter();
+		if (type)
+			adapter.setType((byte)1);
+		else
+			adapter.setType((byte)0);
+		
+		
 		for (DatabaseLocation loc : db.getLocations())
 		{
 			createRow(adapter, loc, distToUser(new LatLng(loc.getX(), loc.getY())));
@@ -140,11 +145,19 @@ public class MapDetailActivity extends Activity {
 		layoutParams2.weight = 1;
 		layoutParams2.gravity = Gravity.CENTER_VERTICAL;
 		textView.setLayoutParams(layoutParams2);
-		textView.setText(Integer.toString((int)distance) + " ft.  " + getDirection(loc));
+		textView.setText(getInitialString(loc) + Integer.toString((int)distance) + " ft.  " + getDirection(loc));
 		textView.setTextSize(24);
 		row.addView(textView);
 		
 		adapter.addView(row, loc.getType());
+	}
+	
+	private String getInitialString(DatabaseLocation loc)
+	{
+		if (loc.getType() == 0)
+			return "Recycle bin: ";
+		else
+			return "Refill station: ";
 	}
 	
 	private String getDirection(DatabaseLocation loc)
@@ -199,10 +212,13 @@ public class MapDetailActivity extends Activity {
 		
 		public int getCount()
 		{
+			int count = 0;
 			if (type == 0)
-				return rowsRecycle.size();
+				count = rowsRecycle.size();
 			else
-				return rowsWater.size();
+				count = rowsWater.size();
+			if (count > 7) count = 7;
+			return count;
 		}
 		
 		public Object getItem(int position)
