@@ -27,7 +27,8 @@
         android:layout_centerVertical="true"
         android:adjustViewBounds="true"
         android:scaleType="fitEnd"
-        android:src="@drawable/main_button01" />
+        android:src="@drawable/main_button01"
+        android:onClick="findClicked" />
     
     <ImageButton
         android:id="@+id/imageButton2"
