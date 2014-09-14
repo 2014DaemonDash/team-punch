@@ -26,6 +26,10 @@
             android:name=".FindMapActivity"
             android:label="@string/title_activity_find_map" >
         </activity>
+        <meta-data
+            android:name="com.google.android.gms.version" />
+            <!-- android:value="@integer/google_play_services_version" -->
+
     </application>
 
 </manifest>
