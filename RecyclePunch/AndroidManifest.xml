@@ -33,7 +33,8 @@
         </activity>
         <activity
             android:name=".FindMapActivity"
-            android:label="@string/title_activity_find_map" >
+            android:label="@string/title_activity_find_map"
+            android:parentActivityName=".MainMenu" >
         </activity>
 
         <meta-data
@@ -46,15 +47,18 @@
         </activity>
         <activity
             android:name=".LearnSlidesActivity"
-            android:label="@string/title_activity_learn_slides" >
+            android:label="@string/title_activity_learn_slides"
+            android:parentActivityName=".MainMenu" >
         </activity>
         <activity
             android:name=".ContribMapActivity"
-            android:label="@string/title_activity_contrib_map" >
+            android:label="@string/title_activity_contrib_map"
+            android:parentActivityName=".MainMenu" >
         </activity>
         <activity
             android:name=".ExtraMenuActivity"
-            android:label="@string/title_activity_extra_menu" >
+            android:label="@string/title_activity_extra_menu"
+            android:parentActivityName=".MainMenu" >
         </activity>
 
         <meta-data
@@ -66,15 +70,18 @@
 
         <activity
             android:name=".AchievementsActivity"
-            android:label="@string/title_activity_achievements" >
+            android:label="@string/title_activity_achievements"
+            android:parentActivityName=".ExtraMenuActivity" >
         </activity>
         <activity
             android:name=".OptionMenuActivity"
-            android:label="@string/title_activity_option_menu" >
+            android:label="@string/title_activity_option_menu"
+            android:parentActivityName=".ExtraMenuActivity" >
         </activity>
         <activity
             android:name=".CreditMenuActivity"
-            android:label="@string/title_activity_credit_menu" >
+            android:label="@string/title_activity_credit_menu"
+            android:parentActivityName=".ExtraMenuActivity" >
         </activity>
     </application>
 
