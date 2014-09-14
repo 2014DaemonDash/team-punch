@@ -16,14 +16,52 @@
         android:adjustViewBounds="true"
         android:src="@drawable/main_graphic" />
 
+    
     <ImageButton
         android:id="@+id/imageButton1"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView1"
-        android:layout_marginTop="94dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
         android:adjustViewBounds="true"
         android:scaleType="fitEnd"
         android:src="@drawable/main_button01" />
+    
+    <ImageButton
+        android:id="@+id/imageButton2"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageButton1"
+        android:layout_marginTop="18dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitEnd"
+        android:src="@drawable/main_button02" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageButton2"
+        android:layout_marginTop="18dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitEnd"
+        android:src="@drawable/main_button03" />
+
+
+    <ImageButton
+        android:id="@+id/imageButton4"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imageButton3"
+        android:layout_marginTop="18dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitEnd"
+        android:src="@drawable/main_button04" />
 
 </RelativeLayout>
