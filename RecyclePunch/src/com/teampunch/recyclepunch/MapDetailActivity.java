@@ -47,15 +47,12 @@ public class MapDetailActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-<<<<<<< HEAD
 	private void initLists(){
 		int n = 5;
-		
-=======
-	public void finish()
-	{
+}
+
+	public void finish(){
 		super.finish();
 		overridePendingTransition(R.anim.fade_in, R.anim.push_out_right);
->>>>>>> origin/master
 	}
 }
