@@ -1,17 +1,28 @@
 package com.teampunch.recyclepunch;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.teampunch.recyclepunch.Database.DatabaseLocation;
+
 public class MapDetailActivity extends Activity {
+	
+	private Database database;
+	private boolean type;
+	private ArrayList<DatabaseLocation> recycleList, refillList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map_detail);
+		byte initState = getIntent().getByteExtra("com.teampunch.recyclepunch.InitCategory", (byte)0);
+		type = initState != 1;
+		database = Database.loadDataFromStorage(this);
 	}
 
 	@Override
@@ -33,5 +44,10 @@ public class MapDetailActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	private void initLists(){
+		int n = 5;
+		
 	}
 }

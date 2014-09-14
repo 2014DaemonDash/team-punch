@@ -20,7 +20,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.drive.Drive;
-import com.google.android.gms.internal.gm;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -46,6 +45,7 @@ public class FindMapActivity extends FragmentActivity implements ConnectionCallb
 	private boolean resolving;
 	private boolean drawRecycling, drawRefill;
 	private ArrayList<Marker> markers;
+	private double userLat, userLong;
 	
 	private Database database;
 	
@@ -71,9 +71,9 @@ public class FindMapActivity extends FragmentActivity implements ConnectionCallb
 		gm.setMyLocationEnabled(true);
 		gm.moveCamera(CameraUpdateFactory.newLatLngZoom(umcp, INIT_ZOOM_LEVEL));
 		apiClient.connect();
-		
 		database = Database.loadDataFromStorage(this);
 		initMarkers();
+		userLat = 0; userLong = 0;
 	}
 	
 	@Override
@@ -94,6 +94,7 @@ public class FindMapActivity extends FragmentActivity implements ConnectionCallb
 	
 	public void viewallClicked(View view) {
 		Intent intent = new Intent(this, MapDetailActivity.class);
+		intent.putExtra("com.teampunch.recyclepunch.InitCategory", (byte)(2*(drawRecycling?1:0) + (drawRefill?1:0)));
     	startActivity(intent);
 	}
 	
