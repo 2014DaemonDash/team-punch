@@ -7,9 +7,16 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+
+import android.content.Context;
+import android.util.Log;
 
 public class Database
 {	
@@ -18,6 +25,38 @@ public class Database
 	public Database()
 	{
 		locations = new ArrayList<Location>();
+	}
+	
+	public static void loadDataFromWeb(Context context)
+	{
+		try
+        {
+			URL url = new URL("https://raw.githubusercontent.com/2014DaemonDash/team-punch/master/README.md");
+			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+			try
+			{
+				InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+				Database db = new Database();
+				db.loadData(new InputStreamReader(in));
+				db.saveData(context.openFileOutput("data", Context.MODE_PRIVATE));
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+			finally
+			{
+				urlConnection.disconnect();
+			}
+        }
+        catch (MalformedURLException e)
+        {
+			e.printStackTrace();
+		}
+        catch (IOException e)
+        {
+        	e.printStackTrace();
+        }
 	}
 	
 	public void loadData(Reader rd) throws IOException
@@ -37,6 +76,12 @@ public class Database
 		catch (NumberFormatException e)
 		{
 			
+		}
+		
+		Log.i("com.teampunch.recyclepunch", "done");
+		for (Location loc : locations)
+		{
+			Log.i("com.teampunch.recyclepunch", loc.x + ", " + loc.y + ", " + loc.type);
 		}
 	}
 	

@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,18 @@ public class MainMenu extends Activity {
         setContentView(R.layout.activity_main_menu);
         ActionBar actionBar = getActionBar();
         actionBar.hide();
+        
+        //Retrieve data from GitHub
+        if (savedInstanceState == null)
+        {
+        	new Thread()
+        	{
+        		public void run()
+        		{
+        			Database.loadDataFromWeb(MainMenu.this);
+        		}
+        	}.start();
+        }
     }
 
     public void findClicked(View view)
