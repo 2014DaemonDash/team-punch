@@ -24,7 +24,8 @@
         android:theme="@style/AppThemeWithoutActionBarTitle" >
         <activity
             android:name=".MainMenu"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,7 +35,8 @@
         <activity
             android:name=".FindMapActivity"
             android:label="@string/title_activity_find_map"
-            android:parentActivityName=".MainMenu" >
+            android:parentActivityName=".MainMenu"
+            android:screenOrientation="portrait" >
         </activity>
 
         <meta-data
@@ -43,22 +45,26 @@
 
         <activity
             android:name=".MapDetailActivity"
-            android:label="@string/title_activity_map_detail" >
+            android:label="@string/title_activity_map_detail"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".LearnSlidesActivity"
             android:label="@string/title_activity_learn_slides"
-            android:parentActivityName=".MainMenu" >
+            android:parentActivityName=".MainMenu"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".ContribMapActivity"
             android:label="@string/title_activity_contrib_map"
-            android:parentActivityName=".MainMenu" >
+            android:parentActivityName=".MainMenu"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".ExtraMenuActivity"
             android:label="@string/title_activity_extra_menu"
-            android:parentActivityName=".MainMenu" >
+            android:parentActivityName=".MainMenu"
+            android:screenOrientation="portrait" >
         </activity>
 
         <meta-data
@@ -71,17 +77,20 @@
         <activity
             android:name=".AchievementsActivity"
             android:label="@string/title_activity_achievements"
-            android:parentActivityName=".ExtraMenuActivity" >
+            android:parentActivityName=".ExtraMenuActivity"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".OptionMenuActivity"
             android:label="@string/title_activity_option_menu"
-            android:parentActivityName=".ExtraMenuActivity" >
+            android:parentActivityName=".ExtraMenuActivity"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".CreditMenuActivity"
             android:label="@string/title_activity_credit_menu"
-            android:parentActivityName=".ExtraMenuActivity" >
+            android:parentActivityName=".ExtraMenuActivity"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 
