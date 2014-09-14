@@ -5,12 +5,21 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+
 public class FindMapActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_find_map);
+		GoogleMap gm = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+		LatLng umcp = new LatLng(38.9875, -76.9410);
+		gm.setMyLocationEnabled(true);
+		gm.moveCamera(CameraUpdateFactory.newLatLngZoom(umcp, 14));
 	}
 
 	@Override
