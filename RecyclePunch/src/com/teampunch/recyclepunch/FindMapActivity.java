@@ -20,7 +20,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.drive.Drive;
-import com.google.android.gms.internal.gm;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -52,6 +51,7 @@ public class FindMapActivity extends FragmentActivity implements ConnectionCallb
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		overridePendingTransition(R.anim.push_in_left, R.anim.fade_out);
 		boolean first = savedInstanceState == null;
 		setContentView(R.layout.activity_find_map);
 		resolving = first? false: 
@@ -218,4 +218,10 @@ public class FindMapActivity extends FragmentActivity implements ConnectionCallb
             ((FindMapActivity)getActivity()).onDialogDismissed();
         }
     }
+    
+    public void finish()
+	{
+		super.finish();
+		overridePendingTransition(R.anim.fade_in, R.anim.push_out_right);
+	}
 }

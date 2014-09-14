@@ -12,6 +12,7 @@ public class ExtraMenuActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		overridePendingTransition(R.anim.push_in_left, R.anim.fade_out);
 		setContentView(R.layout.activity_extra_menu);
 	}
 
@@ -52,5 +53,11 @@ public class ExtraMenuActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public void finish()
+	{
+		super.finish();
+		overridePendingTransition(R.anim.fade_in, R.anim.push_out_right);
 	}
 }
