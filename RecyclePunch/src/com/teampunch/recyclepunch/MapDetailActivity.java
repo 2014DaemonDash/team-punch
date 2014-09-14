@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
@@ -43,6 +44,10 @@ public class MapDetailActivity extends Activity {
 		byte initState = i.getByteExtra("com.teampunch.recyclepunch.InitCategory", (byte)0);
 		double[] coords = i.getDoubleArrayExtra("com.teampunch.recyclepunch.UserCoord");
 		type = initState == 1;
+		ImageButton tmp1 = (ImageButton)findViewById(R.id.imageButton2);
+		ImageButton tmp2 = (ImageButton)findViewById(R.id.imageButton3);
+		tmp1.setImageResource(type?R.drawable.off_recycle_toggle : R.drawable.recycle_toggle);
+		tmp2.setImageResource(type? R.drawable.refill_toggle : R.drawable.off_refill_toggle);
 		userLat = coords[0];
 		userLong = coords[1];
 		initLists();
@@ -251,10 +256,18 @@ public class MapDetailActivity extends Activity {
 	public void recyclingClicked(View view){
 		type = false;
 		adapter.setType((byte)0);
+		ImageButton tmp1 = (ImageButton)findViewById(R.id.imageButton2);
+		ImageButton tmp2 = (ImageButton)findViewById(R.id.imageButton3);
+		tmp1.setImageResource(R.drawable.recycle_toggle);
+		tmp2.setImageResource(R.drawable.off_refill_toggle);
 	}
 	
 	public void refillClicked(View view){
 		type = true;
 		adapter.setType((byte)1);
+		ImageButton tmp1 = (ImageButton)findViewById(R.id.imageButton2);
+		ImageButton tmp2 = (ImageButton)findViewById(R.id.imageButton3);
+		tmp2.setImageResource(R.drawable.refill_toggle);
+		tmp1.setImageResource(R.drawable.off_recycle_toggle);
 	}
 }
