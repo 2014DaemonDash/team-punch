@@ -14,7 +14,7 @@
         android:paddingTop="48dp"
         android:paddingBottom="48dp"
         android:adjustViewBounds="true"
-        android:src="@drawable/main_graphic" />
+        android:src="@drawable/daemondash" />
 
     <ImageButton
         android:id="@+id/imageButton1"
