@@ -1,5 +1,7 @@
 package com.teampunch.recyclepunch;
 
+import java.util.ArrayList;
+
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,12 +20,14 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.drive.Drive;
+import com.google.android.gms.internal.gm;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.teampunch.recyclepunch.Database.DatabaseLocation;
 
@@ -32,21 +36,30 @@ public class FindMapActivity extends FragmentActivity implements ConnectionCallb
     private static final int RESOLUTION_REQUEST_CODE = 9001;
     private static final String ERROR_TAG = "shitsurei, kamimashita";
     private static final String RESOLUTION_SAVE_STATE = "the flub lives on";
+    private static final String RECYCLING_TOGGLE_STATE = "running out of ideas, so we recycle old ones";
+    private static final String REFILL_TOGGLE_STATE = "refill me up oniichan";
     private static final int INIT_ZOOM_LEVEL = 14;
     private static final int FOCUSED_ZOOM_LEVEL = 19;
 	
 	private GoogleApiClient apiClient;
 	private GoogleMap gm;
 	private boolean resolving;
+	private boolean drawRecycling, drawRefill;
+	private ArrayList<Marker> markers;
 	
 	private Database database;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		boolean first = savedInstanceState == null;
 		setContentView(R.layout.activity_find_map);
-		resolving = (savedInstanceState == null)? false: 
+		resolving = first? false: 
 			savedInstanceState.getBoolean(RESOLUTION_SAVE_STATE, false);
+		drawRecycling = first? true: 
+			savedInstanceState.getBoolean(RECYCLING_TOGGLE_STATE, true);
+		drawRefill = first? true:
+			savedInstanceState.getBoolean(REFILL_TOGGLE_STATE, true);
         apiClient = new GoogleApiClient.Builder(this)
 				.addApi(LocationServices.API)
 				.addScope(Drive.SCOPE_FILE)
@@ -60,12 +73,23 @@ public class FindMapActivity extends FragmentActivity implements ConnectionCallb
 		apiClient.connect();
 		
 		database = Database.loadDataFromStorage(this);
-		for (DatabaseLocation dl : database.getLocations()){
-			MarkerOptions marmopt = new MarkerOptions()
-					.position(dl.toCoord())
-					.icon(BitmapDescriptorFactory.defaultMarker((dl.getType() == 0)? 0.0f: 0.5f));
-			gm.addMarker(marmopt);
-		}
+		initMarkers();
+	}
+	
+	@Override
+	protected void onStop(){
+		apiClient.disconnect();
+		super.onStop();
+	}
+	
+	public void recyclingToggleClicked(View view){
+		drawRecycling = !drawRecycling;
+		repaintMarkers();
+	}
+	
+	public void refillToggleClicked(View view){
+		drawRefill = !drawRefill;
+		repaintMarkers();
 	}
 	
 	public void viewallClicked(View view) {
@@ -73,10 +97,26 @@ public class FindMapActivity extends FragmentActivity implements ConnectionCallb
     	startActivity(intent);
 	}
 	
-	@Override
-	protected void onStop(){
-		apiClient.disconnect();
-		super.onStop();
+	private void initMarkers(){
+		markers = new ArrayList<Marker>();
+		for (DatabaseLocation dl : database.getLocations()){
+			boolean type = (dl.getType() == (byte)0);
+			MarkerOptions marmopt = new MarkerOptions()
+					.position(dl.toCoord())
+					.title(type? "Recycling Location" : "Water Refill Station")
+					.visible(type? drawRecycling : drawRefill)
+					.alpha(0.85f)
+					.icon(BitmapDescriptorFactory.defaultMarker(type? 0.0f: 180.0f));
+			markers.add(gm.addMarker(marmopt));
+		}
+	}
+	
+	private void repaintMarkers(){
+		int i;
+		for (i = 0; i < markers.size() && i < database.getLocations().size(); i++){
+			boolean type = database.getLocations().get(i).getType() == (byte)0;
+			markers.get(i).setVisible(type? drawRecycling : drawRefill);
+		}
 	}
 
 	@Override
@@ -147,6 +187,8 @@ public class FindMapActivity extends FragmentActivity implements ConnectionCallb
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(RESOLUTION_SAVE_STATE, resolving);
+        outState.putBoolean(RECYCLING_TOGGLE_STATE, drawRecycling);
+        outState.putBoolean(REFILL_TOGGLE_STATE, drawRefill);
     }
 	
     private void showErrorDialog(int errorCode) {
