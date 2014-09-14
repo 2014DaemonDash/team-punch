@@ -19,6 +19,7 @@ public class MapDetailActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		overridePendingTransition(R.anim.push_in_left, R.anim.fade_out);
 		setContentView(R.layout.activity_map_detail);
 		byte initState = getIntent().getByteExtra("com.teampunch.recyclepunch.InitCategory", (byte)0);
 		type = initState != 1;
@@ -46,8 +47,15 @@ public class MapDetailActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+<<<<<<< HEAD
 	private void initLists(){
 		int n = 5;
 		
+=======
+	public void finish()
+	{
+		super.finish();
+		overridePendingTransition(R.anim.fade_in, R.anim.push_out_right);
+>>>>>>> origin/master
 	}
 }

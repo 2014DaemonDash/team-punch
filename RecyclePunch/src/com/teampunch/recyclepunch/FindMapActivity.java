@@ -52,6 +52,7 @@ public class FindMapActivity extends FragmentActivity implements ConnectionCallb
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		overridePendingTransition(R.anim.push_in_left, R.anim.fade_out);
 		boolean first = savedInstanceState == null;
 		setContentView(R.layout.activity_find_map);
 		resolving = first? false: 
@@ -219,4 +220,10 @@ public class FindMapActivity extends FragmentActivity implements ConnectionCallb
             ((FindMapActivity)getActivity()).onDialogDismissed();
         }
     }
+    
+    public void finish()
+	{
+		super.finish();
+		overridePendingTransition(R.anim.fade_in, R.anim.push_out_right);
+	}
 }

@@ -44,6 +44,7 @@ public class ContribMapActivity extends FragmentActivity implements ConnectionCa
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		overridePendingTransition(R.anim.push_in_left, R.anim.fade_out);
 		setContentView(R.layout.activity_contrib_map);
 		resolving = (savedInstanceState == null)? false: 
 			savedInstanceState.getBoolean(RESOLUTION_SAVE_STATE, false);
@@ -67,7 +68,12 @@ public class ContribMapActivity extends FragmentActivity implements ConnectionCa
 			gm.addMarker(marmopt);
 		}
 	}
-		
+	
+	public void contribClicked(View view) {
+		ContributionDialogFragment cdf = new ContributionDialogFragment();
+		cdf.show(getFragmentManager(), "button");
+	}
+	
 	@Override
 	protected void onStop(){
 		apiClient.disconnect();
@@ -171,4 +177,10 @@ public class ContribMapActivity extends FragmentActivity implements ConnectionCa
             ((FindMapActivity)getActivity()).onDialogDismissed();
         }
     }
+    
+    public void finish()
+	{
+		super.finish();
+		overridePendingTransition(R.anim.fade_in, R.anim.push_out_right);
+	}
 }
