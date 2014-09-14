@@ -10,6 +10,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -56,6 +57,11 @@ public class FindMapActivity extends FragmentActivity implements ConnectionCallb
 		apiClient.connect();
 		
 		database = Database.loadDataFromStorage(this);
+	}
+	
+	public void viewallClicked(View view) {
+		Intent intent = new Intent(this, MapDetailActivity.class);
+    	startActivity(intent);
 	}
 	
 	@Override

@@ -46,7 +46,8 @@
         <activity
             android:name=".MapDetailActivity"
             android:label="@string/title_activity_map_detail"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:parentActivityName=".FindMapActivity" >
         </activity>
         <activity
             android:name=".LearnSlidesActivity"
