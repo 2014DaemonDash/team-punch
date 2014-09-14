@@ -1,4 +1,4 @@
-package net.patowen.recyclepunch;
+package com.teampunch.recyclepunch;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
