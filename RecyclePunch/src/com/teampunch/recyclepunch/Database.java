@@ -5,6 +5,8 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -27,18 +29,40 @@ public class Database
 		locations = new ArrayList<Location>();
 	}
 	
+	public static Database loadDataFromStorage(Context context)
+	{
+		Database db = new Database();
+        try
+        {
+			db.loadData(context.openFileInput("data"));
+		}
+        catch (FileNotFoundException e)
+        {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        catch (IOException e)
+        {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        return db;
+	}
+	
 	public static void loadDataFromWeb(Context context)
 	{
 		try
         {
-			URL url = new URL("https://raw.githubusercontent.com/2014DaemonDash/team-punch/master/README.md");
+			URL url = new URL("https://raw.githubusercontent.com/2014DaemonDash/team-punch/master/RecyclePunch/data");
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			try
 			{
 				InputStream in = new BufferedInputStream(urlConnection.getInputStream());
 				Database db = new Database();
 				db.loadData(new InputStreamReader(in));
-				db.saveData(context.openFileOutput("data", Context.MODE_PRIVATE));
+				FileOutputStream fos = context.openFileOutput("data", Context.MODE_PRIVATE);
+				db.saveData(fos);
 			}
 			catch (IOException e)
 			{
@@ -78,10 +102,10 @@ public class Database
 			
 		}
 		
-		Log.i("com.teampunch.recyclepunch", "done");
+		Log.i("Database", "done");
 		for (Location loc : locations)
 		{
-			Log.i("com.teampunch.recyclepunch", loc.x + ", " + loc.y + ", " + loc.type);
+			Log.i("Database", loc.x + ", " + loc.y + ", " + loc.type);
 		}
 	}
 	
@@ -96,6 +120,11 @@ public class Database
 			loc.loadData(dis);
 			locations.add(loc);
 		}
+		
+		for (Location loc : locations)
+		{
+			Log.i("Database", loc.x + ", " + loc.y + ", " + loc.type);
+		}
 	}
 	
 	public void saveData(OutputStream os) throws IOException
@@ -107,6 +136,8 @@ public class Database
 		{
 			loc.saveData(dos);
 		}
+		
+		dos.close();
 	}
 	
 	public class Location

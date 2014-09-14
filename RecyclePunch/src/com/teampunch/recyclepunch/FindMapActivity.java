@@ -12,6 +12,8 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class FindMapActivity extends Activity {
 
+	private Database database;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -20,6 +22,8 @@ public class FindMapActivity extends Activity {
 		LatLng umcp = new LatLng(38.9875, -76.9410);
 		gm.setMyLocationEnabled(true);
 		gm.moveCamera(CameraUpdateFactory.newLatLngZoom(umcp, 14));
+		
+		database = Database.loadDataFromStorage(this);
 	}
 
 	@Override
