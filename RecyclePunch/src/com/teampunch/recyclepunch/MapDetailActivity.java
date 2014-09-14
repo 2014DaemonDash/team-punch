@@ -96,7 +96,7 @@ public class MapDetailActivity extends Activity {
 		dlat = coords.latitude - userLat;
 		if (dlon > 180) dlon -= 360;
 		if (dlon < -180) dlon += 360;
-		dlon *= Math.cos(dlat*Math.PI/180);
+		dlon *= Math.cos(userLat*Math.PI/180);
 		d = Math.sqrt(dlat*dlat + dlon*dlon);
 		
 		
@@ -153,7 +153,7 @@ public class MapDetailActivity extends Activity {
 		double dlat = loc.getX() - userLat;
 		if (dlon > 180) dlon -= 360;
 		if (dlon < -180) dlon += 360;
-		dlon *= Math.cos(dlat*Math.PI/180);
+		dlon *= Math.cos(userLat*Math.PI/180);
 		
 		double angle = Math.atan2(dlat, dlon)*180/Math.PI;
 		angle += 22.5;
